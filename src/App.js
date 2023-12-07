@@ -1,23 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+import SlotMachine from "./components/SlotMachine";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import UserSection from "./components/User";
+import { useState } from "react";
+import ScoreTable from "./components/ScoreTable";
 
 function App() {
+  const [user, setUser] = useState();
+  const handleUserChange = (user) => {
+    setUser(user);
+  };
+  if (!user) {
+    return (
+      <div className="bg-dark text-light p-3 text-center min-vh-100">
+        <Container>
+          <Row className="m-4 text-center">
+            <h1>Slot Machine</h1>
+          </Row>
+          <Row className="m-4 text-center">
+            <UserSection handleChange={handleUserChange} />
+          </Row>
+        </Container>
+      </div>
+    );
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="bg-dark text-light p-3 text-center min-vh-100">
+      <Container>
+        <Row className="m-4 text-center">
+          <h1>Slot Machine</h1>
+        </Row>
+        <Row className="m-4 text-center">
+          <UserSection handleChange={handleUserChange} />
+        </Row>
+        <Row className="m-4">
+          <SlotMachine userID={user.id} />
+        </Row>
+      </Container>
     </div>
   );
 }
